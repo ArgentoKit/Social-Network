@@ -1,0 +1,52 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba($color: #000000, $alpha: 0.1);
+}
+
+.list {
+    border-right: 1px solid rgba($color: #000000, $alpha: 0.1);
+}
+
+.messages {
+    padding: 20px;
+}
+
+.newMessage {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-top: 30px;
+
+    .text {
+        width: 400px;
+        min-height: 70px;
+        font-size: 14px;
+        resize: none;
+        outline: none;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #d3d3d3;
+        margin-right: 10px;
+    }
+    .sendMessage {
+        max-width: 200px;
+        background-color: #ffda3a;
+        color: #000;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: 0;
+        border-radius: 8px;
+        padding: 12px 25px;
+        outline: none;
+        cursor: pointer;
+        transition: all .3s;
+    }
+    .sendMessage:hover {
+        background-color: #e6c32c;   
+    }
+}

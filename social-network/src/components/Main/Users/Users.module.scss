@@ -1,0 +1,94 @@
+.users {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba($color: #000000, $alpha: 0.1);
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 15px 0 !important;
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+    .page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        background-color: #fff;
+        border: 1px solid #8962f8;
+        border-radius: 3px;
+        padding: 5px 10px;
+        margin: 0 3px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        transition: all .1s;
+        cursor: pointer;
+    }
+    .page:hover,
+    .select {
+        background-color: #fd820b;
+        color: #fff;
+        font-weight: 600;
+        border: 0;
+        cursor: pointer;
+    }
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+    .avatar {
+        width: 120px;
+        border-radius: 50%;
+        margin: 0 20px;
+    }
+    
+    .info {
+        font-family: 'Poppins';
+        width: 60%;
+    }
+
+    .name {
+        font-weight: 600;
+        color: #00447B;
+    }
+    
+    .status {
+        font-size: 14px;
+        color: #c0c0c0;
+    }
+
+    .location {
+        color: #00447B;
+    }
+
+    .button__unfollow,
+    .button__follow {
+        width: 111px;
+        background-color: #8962f8;
+        border: 0;
+        font-family: 'Poppins';
+        font-size: 14px;
+        font-weight: 600;
+        padding: 5px 25px;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        outline: none;
+        transition: all .3s;
+    }
+    .button__unfollow:hover,
+    .button__follow:hover {
+        background-color: #5f41b2;
+    }
+}
+
+.user:last-child {
+    border-bottom: 0;
+}

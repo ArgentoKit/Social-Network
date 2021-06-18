@@ -1,0 +1,13 @@
+.dialog {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #00447B;
+    padding: 20px 0 20px 20px;
+    transition: all .3s;
+    cursor: pointer;
+}
+.dialog:hover {
+    background-color: #f5f5f5;
+    color: #1ea5fc;
+}

@@ -1,0 +1,19 @@
+.loginBlock {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    grid-column: 3/-1;
+    margin-top: 30px;
+    margin-left: 25px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.login {
+    padding: 20px 50px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba($color: #000000, $alpha: 0.1);
+    color: #00447B;
+}

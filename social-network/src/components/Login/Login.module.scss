@@ -1,0 +1,22 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/3;
+}
+
+.Input {
+    min-height: 35px;
+    width: 200px;
+    font-size: 14px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #d3d3d3;
+    margin-bottom: 8px;
+    padding-left: 10px;
+}
+
+.formSummaryError {
+    font-weight: 600;
+    color: rgb(228, 14, 32);
+    transition: all .3s;
+}

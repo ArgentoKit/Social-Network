@@ -1,0 +1,60 @@
+.info {
+    width: 260px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 90px 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba($color: #000000, $alpha: 0.1);
+
+    .avatar {
+        width: 50px;
+        margin: 10px 20px;
+        grid-row: 1/3;
+        border-radius: 12px;
+    }
+    
+    .name {
+        margin-top: 25px;
+        margin-right: 20px;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 600;
+        color: #00447B;
+    }
+
+    .user {
+        margin-bottom: 20px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 14px;
+        color: #4274B0;
+    }
+
+    .logoutBlock {
+        grid-column: 1/3;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .logout {
+        margin: 5px 10px 10px 0;
+        padding: 3px 15px;
+        background-color: #fff;
+        font-size: 14px;
+        border: 2px solid #00447B;
+        border-radius: 8px;
+        outline: none;
+        cursor: pointer;
+        color: #00447B;
+        transition: all .3s;
+    }
+    .logout:hover {
+        background-color: #df1125;
+        color: #fff;
+        border: 2px solid #df1125;
+    }
+}

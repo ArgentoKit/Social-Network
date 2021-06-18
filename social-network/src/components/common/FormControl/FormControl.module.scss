@@ -1,0 +1,17 @@
+.formControl {
+    display: flex;
+    flex-direction: column;
+}
+
+.formControlChild {
+    display: inline-block;
+}
+
+.error {
+    border: solid rgb(228, 14, 32) 2px;
+    transition: all .3s;
+}
+
+.errorText {
+    color: rgb(228, 14, 32);
+}

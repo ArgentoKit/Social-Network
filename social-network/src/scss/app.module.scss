@@ -1,0 +1,16 @@
+@import 'reset';
+@import 'global';
+
+.wrapper {
+    min-height: 100vh;
+    background-color: #F8F8F8;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 290px 800px 285px;
+    grid-template-rows: 1fr;
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 0 15px 30px 15px;
+}
