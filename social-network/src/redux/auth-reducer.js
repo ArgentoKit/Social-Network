@@ -33,7 +33,7 @@ export const getAuthUserData = () => {
     return (
         async (dispatch) => {
             let data = await authAPI.authData()
-            
+
             if (data.resultCode === 0) {
                 let { id, email, login } = data.data
                 dispatch(setAuthUserData(id, email, login, true))
@@ -43,28 +43,28 @@ export const getAuthUserData = () => {
 }
 export const login = (email, password, rememberMe) => {
     return (
-        (dispatch) => {
-            authAPI.login(email, password, rememberMe)
-                .then(data => {
-                    if (data.resultCode === 0) {
-                        dispatch(getAuthUserData())
-                    } else {
-                        let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
-                        dispatch(stopSubmit('login', { _error: message }))
-                    }
-                })
+        async (dispatch) => {
+            let data = await authAPI.login(email, password, rememberMe)
+
+            if (data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            } else {
+                let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+                dispatch(stopSubmit('login', { _error: message }))
+            }
+
         }
     )
 }
 export const logout = () => {
     return (
-        (dispatch) => {
-            authAPI.logout()
-                .then(data => {
-                    if (data.resultCode === 0) {
-                        dispatch(setAuthUserData(null, null, null, false))
-                    }
-                })
+        async (dispatch) => {
+            let data = await authAPI.logout()
+
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+
         }
     )
 }
