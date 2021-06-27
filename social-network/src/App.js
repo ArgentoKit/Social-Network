@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
 import AuthContainer from './components/Auth/AuthContainer.js';
 import Main from './components/Main/Main.js';
 import Sidebar from './components/Sidebar/sidebar.js'
@@ -16,20 +18,18 @@ class App extends React.Component {
   }
 
   render() {
-    if(!this.props.initialized) {
+    if (!this.props.initialized) {
       return <Preloader />
     }
     return (
-      <BrowserRouter>
-        <div className={style.wrapper}>
-          <div className={style.container}>
-            <Sidebar />
-            <Main />
-            <Route path='/login' render={() => <LoginPage />} />
-            <AuthContainer />
-          </div>
+      <div className={style.wrapper}>
+        <div className={style.container}>
+          <Sidebar />
+          <Main />
+          <Route path='/login' render={() => <LoginPage />} />
+          <AuthContainer />
         </div>
-      </BrowserRouter>
+      </div>
     );
   }
 }
@@ -38,6 +38,18 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized
 })
 
-export default compose(
+let AppContainer = compose(
   connect(mapStateToProps, { initializeApp })
 )(App)
+
+const SamuraiJsApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>,
+    </BrowserRouter>
+  )
+}
+
+export default SamuraiJsApp

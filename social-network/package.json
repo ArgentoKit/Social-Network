@@ -46,6 +46,7 @@
   "devDependencies": {
     "axios": "^0.21.1",
     "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^16.4.0",
     "redux": "^4.1.0",
     "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0"
