@@ -12,7 +12,11 @@ const Profile = (props) => {
                     <img className={style.header__img} src={head} alt="image"/>
                 </header>
                 <div className={style.content}>
-                    <Info profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                    <Info   isOwner={props.isOwner} 
+                            profile={props.profile} 
+                            status={props.status} 
+                            updateStatus={props.updateStatus}
+                            saveAvatar={props.saveAvatar}/>
                     <MyPostsContainer />
                 </div>
             </div>
