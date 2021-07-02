@@ -45,7 +45,7 @@ const profileReducer = (state = initialState, action) => {
         case SAVE_AVATAR_SUCCESS:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: {...state.profile.photos, large: action.photos.large}}
             }
         default:
             return state
@@ -107,7 +107,7 @@ export const saveAvatar = (file) => {
     return (
         async (dispatch) => {
             let data = await profileAPI.saveAvatar(file)
-            dispatch(saveAvatarSuccess(data.photos))
+            dispatch(saveAvatarSuccess(data.data.data.photos))
         }
     )
 }
