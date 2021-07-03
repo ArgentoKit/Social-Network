@@ -1,13 +1,17 @@
 .info {
     display: grid;
     grid-template-columns: 250px 1fr;
-    grid-gap: 20px;
+    grid-template-rows: 1fr 30px;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
     width: 100%;
     padding: 20px 0 20px 20px;
+    color: #00447B;
     border-bottom: 1px solid rgba(150, 150, 150, 0.3);
 }
 
 .avatar {
+    grid-row: 1/3;
     width: 250px;
     border-radius: 12px;
 }
@@ -33,8 +37,49 @@
     margin-bottom: 15px;
 }
 
-.online {
-    font-family: 'Poppins', sans-serif;
+.editInfo {
+    display: inline-block;
+    max-width: 115px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffda3a;
+    color: #000;
     font-size: 14px;
-    color: #c2c2c2;
+    cursor: pointer;
+    outline: none;
+}
+.editInfo:hover {
+    background-color: #e6c32c;   
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.contactKey {
+    padding-left: 10px;
+}
+
+.changePhoto {
+    display: flex;
+    align-items: flex-end;
+    grid-column: 2/3;
+}
+
+.upload {
+    input[type="file"] {
+        display: none;
+    }
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: #ffda3a;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+}
+.upload:hover {
+    background-color: #e6c32c;   
 }

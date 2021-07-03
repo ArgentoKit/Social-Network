@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './info.module.scss';
 import Preloader from '../../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import userAvatar from '../../../../img/avatar.png'
+import ProfileDataReduxForm from './ProfileDataForm';
 
 export const Info = (props) => {
-    if(!props.profile) {
+    let [editMode, setEditMode] = useState(false)
+
+    const activateEditMode = () => {
+        setEditMode(true)
+    }
+    const deactivateEditMode = () => {
+        setEditMode(false)
+    }
+
+    if (!props.profile) {
         return <Preloader />
+    }
+
+    const onSubmit = (formData) => {
+        props.saveProfile(formData)
     }
 
     const onAvatarSelected = (e) => {
@@ -14,16 +28,48 @@ export const Info = (props) => {
             props.saveAvatar(e.target.files[0])
         }
     }
-    
+
     return (
         <div className={style.info}>
             <img className={style.avatar} src={props.profile.photos.large || userAvatar} alt="image" />
-            <div className={style.description}>
-                <span className={style.name}>{props.profile.fullName}</span>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <span className={style.online}>online</span>
+            { editMode  ? <ProfileDataReduxForm profile={props.profile}
+                                                onSubmit={onSubmit}/> 
+                        : <ProfileData  profile={props.profile} 
+                                        status={props.status} 
+                                        updateStatus={props.updateStatus}
+                                        isOwner={props.isOwner}
+                                        activateEditMode={activateEditMode}/> }
+            <div className={style.changePhoto}>
+                <label className={style.upload}>
+                    {props.isOwner && <input type={'file'} onChange={onAvatarSelected} />}
+                    Change avatar
+                </label>
             </div>
-            <div className={style.upload}>{ props.isOwner && <input type={'file'} onChange={onAvatarSelected}/> }</div>
         </div>
     );
+}
+
+const ProfileData = ({profile, status, updateStatus, isOwner, activateEditMode}) => {
+    return (
+        <div className={style.description}>
+            <span className={style.name}>{profile.fullName}</span>
+            <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+            <div><span className={style.bold}>About me: </span>{profile.aboutMe}</div>
+            <div><span className={style.bold}>Contacts: </span>{Object.keys(profile.contacts).map(key => {
+                return (
+                    <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+                )
+            })}</div>
+            { isOwner && <button className={style.editInfo} onClick={activateEditMode}>Edit info</button>}
+        </div>
+    )
+}
+
+
+const Contact = ({ contactTitle, contactValue }) => {
+    return (
+        <div className={style.contactKey}>
+            {contactTitle} : {contactValue}
+        </div>
+    )
 }

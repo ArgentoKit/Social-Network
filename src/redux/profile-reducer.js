@@ -111,6 +111,13 @@ export const saveAvatar = (file) => {
         }
     )
 }
+export const saveProfile = (profile) => {
+    return (
+        async (dispatch) => {
+            let data = await profileAPI.saveProfile(profile)
+        }
+    )
+}
 
 
 export default profileReducer

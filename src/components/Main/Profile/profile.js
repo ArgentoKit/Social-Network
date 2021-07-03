@@ -16,7 +16,8 @@ const Profile = (props) => {
                             profile={props.profile} 
                             status={props.status} 
                             updateStatus={props.updateStatus}
-                            saveAvatar={props.saveAvatar}/>
+                            saveAvatar={props.saveAvatar}
+                            saveProfile={props.saveProfile}/>
                     <MyPostsContainer />
                 </div>
             </div>
