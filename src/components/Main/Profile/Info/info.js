@@ -11,9 +11,6 @@ export const Info = (props) => {
     const activateEditMode = () => {
         setEditMode(true)
     }
-    const deactivateEditMode = () => {
-        setEditMode(false)
-    }
 
     if (!props.profile) {
         return <Preloader />
@@ -21,6 +18,7 @@ export const Info = (props) => {
 
     const onSubmit = (formData) => {
         props.saveProfile(formData)
+        setEditMode(false)
     }
 
     const onAvatarSelected = (e) => {
@@ -32,13 +30,13 @@ export const Info = (props) => {
     return (
         <div className={style.info}>
             <img className={style.avatar} src={props.profile.photos.large || userAvatar} alt="image" />
-            { editMode  ? <ProfileDataReduxForm profile={props.profile}
-                                                onSubmit={onSubmit}/> 
-                        : <ProfileData  profile={props.profile} 
-                                        status={props.status} 
-                                        updateStatus={props.updateStatus}
-                                        isOwner={props.isOwner}
-                                        activateEditMode={activateEditMode}/> }
+            {editMode   ? <ProfileDataReduxForm initialValues={props.profile}
+                                                onSubmit={onSubmit} />
+                        : <ProfileData  profile={props.profile}
+                                status={props.status}
+                                updateStatus={props.updateStatus}
+                                isOwner={props.isOwner}
+                                activateEditMode={activateEditMode} />}
             <div className={style.changePhoto}>
                 <label className={style.upload}>
                     {props.isOwner && <input type={'file'} onChange={onAvatarSelected} />}
@@ -49,7 +47,7 @@ export const Info = (props) => {
     );
 }
 
-const ProfileData = ({profile, status, updateStatus, isOwner, activateEditMode}) => {
+const ProfileData = ({ profile, status, updateStatus, isOwner, activateEditMode }) => {
     return (
         <div className={style.description}>
             <span className={style.name}>{profile.fullName}</span>
@@ -60,7 +58,15 @@ const ProfileData = ({profile, status, updateStatus, isOwner, activateEditMode})
                     <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
                 )
             })}</div>
-            { isOwner && <button className={style.editInfo} onClick={activateEditMode}>Edit info</button>}
+            <div>
+                <span className={style.bold}>Looking for a job: </span> {profile.lookingForAJob ? 'yes' : 'no'}
+            </div>
+            {profile.lookingForAJob &&
+                <div>
+                    <span className={style.bold}>My professional skills: </span> {profile.lookingForAJobDescription}
+                </div>
+            }
+            {isOwner && <button className={style.editInfo} onClick={activateEditMode}>Edit info</button>}
         </div>
     )
 }

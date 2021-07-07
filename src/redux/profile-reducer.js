@@ -113,8 +113,10 @@ export const saveAvatar = (file) => {
 }
 export const saveProfile = (profile) => {
     return (
-        async (dispatch) => {
-            let data = await profileAPI.saveProfile(profile)
+        async (dispatch, getState) => {
+            const userId = getState().auth.id
+            const data = await profileAPI.saveProfile(profile)
+            dispatch(getUserProfile(userId))
         }
     )
 }
