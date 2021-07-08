@@ -31,7 +31,8 @@ export const Info = (props) => {
         <div className={style.info}>
             <img className={style.avatar} src={props.profile.photos.large || userAvatar} alt="image" />
             {editMode   ? <ProfileDataReduxForm initialValues={props.profile}
-                                                onSubmit={onSubmit} />
+                                                onSubmit={onSubmit}
+                                                profile={props.profile} />
                         : <ProfileData  profile={props.profile}
                                 status={props.status}
                                 updateStatus={props.updateStatus}

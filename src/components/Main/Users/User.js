@@ -12,7 +12,7 @@ const User = ({user, ...props}) => {
             <div className={s.info}>
                 <div className={s.name}>{user.name}</div>
                 <div className={s.status}>{user.status}</div>
-                <div className={s.location}>{'user.location.country} {user.location.city'}</div>
+                <div className={s.location}>{user.aboutMe}</div>
             </div>
             <div className={s.follow}>
                 {user.followed
