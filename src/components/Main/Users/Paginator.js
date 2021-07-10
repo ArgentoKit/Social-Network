@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import s from './Users.module.scss'
+import cn from 'classnames'
 
 const Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10 }) => {
-    let selected = s.page + ' ' + s.select
-
     let pagesCount = Math.ceil(totalItemsCount / pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -23,8 +22,9 @@ const Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, port
                     {pages
                         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                         .map(p => {
-                            return <li key={p} className={currentPage === p ? selected : s.page}
-                                onClick={(e) => { onPageChanged(p) }}>{p}</li>
+                            return <li key={p} className={cn(s.page, {
+                                [s.select]: currentPage === p
+                            })} onClick={(e) => { onPageChanged(p) }}>{p}</li>
                         })}
                     {portionCount > portionNumber &&
                         <button className={s.next} onClick={() => { setPortionNumber(portionNumber + 1) }}>Next</button>}
