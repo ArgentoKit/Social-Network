@@ -1,4 +1,3 @@
-import { stopSubmit } from "redux-form"
 import { profileAPI } from "../api/api"
 
 const ADD_POST = 'ADD-POST'
@@ -7,17 +6,46 @@ const SET_STATUS = 'SET_STATUS'
 const DELETE_POST = 'DELETE_POST'
 const SAVE_AVATAR_SUCCESS = 'SAVE_AVATAR_SUCCESS'
 
+type PostsType = {
+    id: number
+    message: string
+}
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+type PhotosType = {
+    small: string | null
+    large: string | null
+}
+type ProfileType = {
+    userId: number | undefined
+    lookingForAJob: boolean | undefined
+    lookingForAJobDescription: string | undefined
+    fullName: string | undefined
+    contacts: ContactsType | undefined
+    photos: PhotosType | undefined
+}
+
 let initialState = {
     postsData: [
         { id: 1, message: 'You are beatiful, you know?' },
         { id: 2, message: 'Nice photo' },
         { id: 3, message: 'How are you?' }
-    ],
-    profile: null,
+    ] as Array<PostsType>,
+    profile: null as ProfileType | null,
     status: '',
 }
 
-const profileReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const profileReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
