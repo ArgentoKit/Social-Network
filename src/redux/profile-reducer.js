@@ -99,8 +99,12 @@ export const getStatus = (userId) => {
 export const updateStatus = (status) => {
     return (
         async (dispatch) => {
-            let data = await profileAPI.updateStatus(status)
-            dispatch(setStatus(status))
+            try {
+                let data = await profileAPI.updateStatus(status)
+                dispatch(setStatus(status))
+            } catch (error) {
+                debugger
+            }
         }
     )
 }

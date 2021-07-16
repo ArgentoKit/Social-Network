@@ -13,8 +13,15 @@ import Preloader from './components/common/Preloader/Preloader.js';
 import { compose } from 'redux';
 
 class App extends React.Component {
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    alert('Some error occured')
+  }
   componentDidMount() {
     this.props.initializeApp()
+    window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
   }
 
   render() {
