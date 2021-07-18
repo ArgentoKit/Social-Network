@@ -3,10 +3,12 @@ import s from './Users.module.scss'
 import userAva from '../../../img/user.jpg'
 import { NavLink } from 'react-router-dom'
 
-const User = ({user, ...props}) => {
+const User = ({user, props}) => {
+    const userId = user.id
+    debugger
     return (
-        <div className={s.user} key={user.id}>
-            <NavLink to={'/profile/' + user.id}>
+        <div className={s.user} key={userId}>
+            <NavLink to={'/profile/' + userId}>
                 <img className={s.avatar} src={user.photos.small != null ? user.photos.small : userAva} alt="avatar" />
             </NavLink>
             <div className={s.info}>
@@ -16,10 +18,10 @@ const User = ({user, ...props}) => {
             </div>
             <div className={s.follow}>
                 {user.followed
-                    ? <button className={s.button__unfollow} disabled={props.props.followingProgress.some(id => id === user.id)}
-                        onClick={() => { props.unfollow(user) }}>Unfollow</button>
-                    : <button className={s.button__follow} disabled={props.props.followingProgress.some(id => id === user.id)}
-                        onClick={() => { props.follow(user) }}>Follow</button>}
+                    ? <button className={s.button__unfollow} disabled={props.followingProgress.some(id => id === userId)}
+                        onClick={() => { props.unfollow(userId) }}>Unfollow</button>
+                    : <button className={s.button__follow} disabled={props.followingProgress.some(id => id === userId)}
+                        onClick={() => { props.follow(userId) }}>Follow</button>}
             </div>
         </div>
     )
