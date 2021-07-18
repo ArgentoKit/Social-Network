@@ -3,7 +3,7 @@ import s from './Users.module.scss'
 import userAva from '../../../img/user.jpg'
 import { NavLink } from 'react-router-dom'
 
-const User = ({user, props}) => {
+const User = ({user, follow, unfollow, followingProgress}) => {
     const userId = user.id
     debugger
     return (
@@ -18,10 +18,10 @@ const User = ({user, props}) => {
             </div>
             <div className={s.follow}>
                 {user.followed
-                    ? <button className={s.button__unfollow} disabled={props.followingProgress.some(id => id === userId)}
-                        onClick={() => { props.unfollow(userId) }}>Unfollow</button>
-                    : <button className={s.button__follow} disabled={props.followingProgress.some(id => id === userId)}
-                        onClick={() => { props.follow(userId) }}>Follow</button>}
+                    ? <button className={s.button__unfollow} disabled={followingProgress.some(id => id === userId)}
+                        onClick={() => { unfollow(userId) }}>Unfollow</button>
+                    : <button className={s.button__follow} disabled={followingProgress.some(id => id === userId)}
+                        onClick={() => { follow(userId) }}>Follow</button>}
             </div>
         </div>
     )
