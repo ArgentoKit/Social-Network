@@ -2,8 +2,16 @@ import React from 'react'
 import s from './Users.module.scss'
 import userAva from '../../../img/user.jpg'
 import { NavLink } from 'react-router-dom'
+import { UserType } from '../../../types/types'
 
-const User = ({user, follow, unfollow, followingProgress}) => {
+type PropsType = {
+    user: UserType
+    followingProgress: Array<number>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
+
+const User: React.FC<PropsType> = ({user, follow, unfollow, followingProgress}) => {
     const userId = user.id
     debugger
     return (
@@ -14,7 +22,6 @@ const User = ({user, follow, unfollow, followingProgress}) => {
             <div className={s.info}>
                 <div className={s.name}>{user.name}</div>
                 <div className={s.status}>{user.status}</div>
-                <div className={s.location}>{user.aboutMe}</div>
             </div>
             <div className={s.follow}>
                 {user.followed

@@ -33,3 +33,12 @@ export type UserType = {
     photos: PhotosType
     followed: boolean
 }
+export type FormProfileDataType = {
+    aboutMe: string
+    contacts: ContactsType
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: PhotosType
+    userId: number
+}

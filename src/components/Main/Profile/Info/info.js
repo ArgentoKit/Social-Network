@@ -18,6 +18,7 @@ export const Info = (props) => {
 
     const onSubmit = (formData) => {
         props.saveProfile(formData)
+        debugger
         setEditMode(false)
     }
 
