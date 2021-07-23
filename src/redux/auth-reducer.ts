@@ -1,5 +1,8 @@
+import { Dispatch } from "redux"
 import { stopSubmit } from "redux-form"
+import { ThunkAction } from "redux-thunk"
 import { authAPI, securityAPI } from "../api/api"
+import { AppStateType } from "./redux-store"
 
 const SET_USER_DATA = 'SET_USER_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS'
@@ -13,7 +16,7 @@ let initialState = {
 }
 export type InitialStateType = typeof initialState
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
         case GET_CAPTCHA_URL_SUCCESS:
@@ -27,6 +30,7 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
     }
 }
 
+type ActionsType = SetAuthUserDataActionType | GetCaptchaUrlSuccessActionType
 
 type SetAuthUserDataActionDataType = {
     id: number | null
@@ -57,10 +61,10 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessAc
     }
 }
 
-
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 export const getAuthUserData = () => {
     return (
-        async (dispatch: any) => {
+        async (dispatch: Dispatch<ActionsType>) => {
             let data = await authAPI.authData()
 
             if (data.resultCode === 0) {
@@ -70,9 +74,9 @@ export const getAuthUserData = () => {
         }
     )
 }
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
     return (
-        async (dispatch: any) => {
+        async (dispatch) => {
             let data = await authAPI.login(email, password, rememberMe, captcha)
 
             if (data.resultCode === 0) {
@@ -82,15 +86,16 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
                     dispatch(getCaptchaUrl())
                 }
                 let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+                // @ts-ignore
                 dispatch(stopSubmit('login', { _error: message }))
             }
 
         }
     )
 }
-export const logout = () => {
+export const logout = (): ThunkType => {
     return (
-        async (dispatch: any) => {
+        async (dispatch) => {
             let data = await authAPI.logout()
 
             if (data.resultCode === 0) {
@@ -100,9 +105,9 @@ export const logout = () => {
         }
     )
 }
-export const getCaptchaUrl = () => {
+export const getCaptchaUrl = (): ThunkType => {
     return (
-        async (dispatch: any) => {
+        async (dispatch) => {
             let response = await securityAPI.getCaptchaUrl()
             const captchaUrl = response.data.url
 
