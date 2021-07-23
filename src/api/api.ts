@@ -1,4 +1,5 @@
-import * as axios from "axios";
+import axios from "axios";
+import { ProfileType } from "../types/types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -16,7 +17,7 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getUserProfile(userId) {
+    getUserProfile(userId: number) {
         return (
             instance.get(`profile/${userId}`)
                 .then(response => {
@@ -24,7 +25,7 @@ export const profileAPI = {
                 })
         )
     },
-    getStatus(userId) {
+    getStatus(userId: number) {
         return (
             instance.get(`profile/status/${userId}`)
                 .then(response => {
@@ -32,12 +33,12 @@ export const profileAPI = {
                 })
         )
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return (
             instance.put(`profile/status`, {status: status})
         )
     },
-    saveAvatar(avatarFile) {
+    saveAvatar(avatarFile: any) {
         const formData = new FormData()
         formData.append('image', avatarFile)
         return (
@@ -48,25 +49,50 @@ export const profileAPI = {
             })
         )
     },
-    saveProfile(profile) {
+    saveProfile(profile: ProfileType) {
         return (
             instance.put(`profile`, profile)
         )
     }
 }
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+}
+export enum ResultCodeForCaptcha {
+    CaptchaIsRequired = 10
+}
+
+type MeResponseType = {
+    data: { 
+        id: number, 
+        email: string, 
+        login: string
+    }
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
+type LoginResponseType = {
+    data: { 
+        userId: number
+    }
+    resultCode: ResultCodesEnum | ResultCodeForCaptcha
+    messages: Array<string>
+}
+
 export const authAPI = {
     authData() {
         return (
-            instance.get(`auth/me`)
+            instance.get<MeResponseType>(`auth/me`)
             .then(response => {
                 return response.data
             })
         )
     },
-    login(email, password, rememberMe = false, captcha = null) {
+    login(email: string, password: string, rememberMe = false, captcha: null | string = null) {
         return (
-            instance.post(`auth/login`, {email, password, rememberMe, captcha})
+            instance.post<LoginResponseType>(`auth/login`, {email, password, rememberMe, captcha})
             .then(response => {
                 return response.data
             })
@@ -83,7 +109,7 @@ export const authAPI = {
 }
 
 export const followAPI = {
-    unfollowUser(userId) {
+    unfollowUser(userId: number) {
         return (
             instance.delete(`follow/${userId}`)
             .then(response => {
@@ -91,7 +117,7 @@ export const followAPI = {
             })
         )
     },
-    followUser(userId) {
+    followUser(userId: number) {
         return (
             instance.post(`follow/${userId}`, {})
             .then(response => {
