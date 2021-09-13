@@ -169,6 +169,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
 }
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+
 export const requestUsers = (currentPage: number, pageSize: number): ThunkType => {
     return (
         async (dispatch, getState) => {

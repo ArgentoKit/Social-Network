@@ -11,6 +11,12 @@ let initialState: InitialStateType = {
     initialized: false,
 }
 
+type InitializedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS
+}
+
+type ActionsType = InitializedSuccessActionType
+
 const appReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
@@ -24,11 +30,6 @@ const appReducer = (state = initialState, action: ActionsType): InitialStateType
     }
 }
 
-type ActionsType = InitializedSuccessActionType
-
-type InitializedSuccessActionType = {
-    type: typeof INITIALIZED_SUCCESS
-}
 export const initializedSuccess = (): InitializedSuccessActionType => {
     return {
         type: INITIALIZED_SUCCESS,
@@ -36,6 +37,7 @@ export const initializedSuccess = (): InitializedSuccessActionType => {
 }
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+
 export const initializeApp = (): ThunkType => {
     return (
         async (dispatch) => {

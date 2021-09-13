@@ -113,7 +113,7 @@ export const saveAvatarSuccess = (photos: PhotosType): SaveAvatarSuccessActionTy
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 
-export const getUserProfile = (userId: number | null): ThunkType => {
+export const getUserProfile = (userId: number): ThunkType => {
     return (
         async (dispatch) => {
             let data = await profileAPI.getUserProfile(userId)
@@ -154,6 +154,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => {
         async (dispatch, getState) => {
             const userId = getState().auth.id
             const data = await profileAPI.saveProfile(profile)
+            // @ts-ignore:
             dispatch(getUserProfile(userId))
         }
     )
