@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk"
-import { profileAPI } from "../api/api"
+import { profileAPI } from "../api/profile-api"
 import { PhotosType, PostsType, ProfileType } from "../types/types"
 import { AppStateType } from "./redux-store"
 
@@ -145,7 +145,7 @@ export const saveAvatar = (file: any): ThunkType => {
     return (
         async (dispatch) => {
             let data = await profileAPI.saveAvatar(file)
-            dispatch(saveAvatarSuccess(data.data.data.photos))
+            dispatch(saveAvatarSuccess(data.data.photos))
         }
     )
 }

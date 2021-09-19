@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import { ThunkAction } from "redux-thunk"
-import { followAPI, usersAPI } from "../api/api"
+import { usersAPI } from "../api/users-api"
 import { UserType } from "../types/types"
 import { AppStateType, InferActionsTypes } from "./redux-store"
 
@@ -119,7 +119,7 @@ const _followUnfollorFlow = async ( dispatch: Dispatch<ActionsType>,
 export const follow = (userId: number): ThunkType => {
     return (
         async (dispatch) => {
-            let apiMethod = followAPI.followUser.bind(followAPI)
+            let apiMethod = usersAPI.followUser.bind(usersAPI)
             _followUnfollorFlow(dispatch, userId, apiMethod, actions.followSuccess)
         }
     )
@@ -127,7 +127,7 @@ export const follow = (userId: number): ThunkType => {
 export const unfollow = (userId: number): ThunkType => {
     return (
         async (dispatch) => {
-            let apiMethod = followAPI.unfollowUser.bind(followAPI)
+            let apiMethod = usersAPI.unfollowUser.bind(usersAPI)
             _followUnfollorFlow(dispatch, userId, apiMethod, actions.unfollowSuccess)
         }
     )

@@ -1,7 +1,9 @@
 import { Dispatch } from "redux"
 import { stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
-import { authAPI, ResultCodeForCaptcha, ResultCodesEnum, securityAPI } from "../api/api"
+import { ResultCodeForCaptcha, ResultCodesEnum } from "../api/api"
+import { authAPI } from "../api/auth-api"
+import { securityAPI } from "../api/security-api"
 import { AppStateType } from "./redux-store"
 
 const SET_USER_DATA = 'SET_USER_DATA'
